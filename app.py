@@ -7,13 +7,14 @@ st.set_page_config(page_title="Habibi Dubai Guide", layout="wide", page_icon="ðŸ
 
 if "GEMINI_API_KEY" in st.secrets:
     API_KEY = st.secrets["GEMINI_API_KEY"]
-    # Force the version to 'v1' to avoid the 404 error
-    genai.configure(api_key=API_KEY, transport='rest') 
+    # We add transport='rest' to bypass the buggy v1beta connection
+    genai.configure(api_key=API_KEY, transport='rest')
 else:
     st.error("Missing API Key!")
     st.stop()
 
-# Use 'models/gemini-1.5-flash' (the full path)
+# USE THE FULL PATH NAME HERE
+# Instead of just 'gemini-1.5-flash', use 'models/gemini-1.5-flash'
 model = genai.GenerativeModel(model_name='models/gemini-1.5-flash')
 
 # --- 2. DATABASE SETUP ---
