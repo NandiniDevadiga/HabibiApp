@@ -13,7 +13,7 @@ else:
     st.error("Missing API Key! Please check the Streamlit Secrets tab.")
     st.stop()
 
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-pro')
 
 # --- 2. DATABASE SETUP ---
 def init_db():
