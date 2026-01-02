@@ -5,15 +5,16 @@ import sqlite3
 # --- 1. SETUP & SECRETS ---
 st.set_page_config(page_title="Habibi Dubai Guide", layout="wide", page_icon="🌴")
 
-# This pulls the key from the "vault" you just filled
 if "GEMINI_API_KEY" in st.secrets:
     API_KEY = st.secrets["GEMINI_API_KEY"]
-    genai.configure(api_key=API_KEY)
+    # Force the version to 'v1' to avoid the 404 error
+    genai.configure(api_key=API_KEY, transport='rest') 
 else:
-    st.error("Missing API Key! Please check the Streamlit Secrets tab.")
+    st.error("Missing API Key!")
     st.stop()
 
-model = genai.GenerativeModel('gemini-pro')
+# Use 'models/gemini-1.5-flash' (the full path)
+model = genai.GenerativeModel(model_name='models/gemini-1.5-flash')
 
 # --- 2. DATABASE SETUP ---
 def init_db():
