@@ -4,7 +4,7 @@ import sqlite3
 
 # --- 1. SETUP ---
 st.set_page_config(page_title="Habibi Dubai Guide", layout="wide")
-genai.configure(api_key="YOUR_GEMINI_API_KEY_HERE")
+genai.configure(api_key="AIzaSyDAxYl7I1WPMlRpkCtM5J_FZFp1ACjymHg")
 model = genai.GenerativeModel('gemini-1.5-flash') # Use stable name
 
 # --- 2. DATABASE ---
