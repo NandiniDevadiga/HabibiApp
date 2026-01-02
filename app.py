@@ -7,23 +7,15 @@ st.set_page_config(page_title="Habibi Dubai Guide", layout="wide", page_icon="ðŸ
 
 if "GEMINI_API_KEY" in st.secrets:
     API_KEY = st.secrets["GEMINI_API_KEY"]
-    # Force the transport to 'rest' to avoid the v1beta gRPC bug
-    genai.configure(api_key=API_KEY, transport='rest')
+    # Force 'v1' version to ensure we use the stable 2026 production line
+    genai.configure(api_key=API_KEY)
 else:
-    st.error("Missing API Key! Please check the Streamlit Secrets tab.")
+    st.error("Missing API Key!")
     st.stop()
 
-# USE THE EXACT STRING 'gemini-1.5-flash'
-# Adding the generation_config often clears the 404 mismatch
-model = genai.GenerativeModel(
-    model_name='gemini-1.5-flash',
-    generation_config={
-        "temperature": 1,
-        "top_p": 0.95,
-        "top_k": 40,
-        "max_output_tokens": 8192,
-    }
-)
+# UPDATED FOR 2026: Use the 2.5 Flash model
+model = genai.GenerativeModel('gemini-2.5-flash')
+
 # --- 2. DATABASE SETUP ---
 def init_db():
     # 'check_same_thread=False' is required for Streamlit
